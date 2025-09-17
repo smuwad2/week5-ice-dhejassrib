@@ -23,21 +23,23 @@
         <script>
             // add event handler code here
             function showHint() {
-                const url = "https://reimagined-giggle-4j9v49x74q6x27-3000.app.github.dev/suggest"
-                var query = name
-                axios.get(url, {
+                // const url = "https://reimagined-giggle-4j9v49x74q6x27-3000.app.github.dev/suggest"
+                
+                // can just use relative url -   url = /suggest
+                axios.get("/suggest", {
                         params: {
-                            q : query
+                            "query" : document.getElementById("nameInput").value
                         }
                 })
                 .then(response =>  {
-                    console.log(response.data)
-                    const name = response.data.name[0].
-                    document.getElementById("suggestions").innerText += name;
+                    // console.log(response.data)
+                    // const name = response.data[0]
+                    document.getElementById("suggestions").innerText = response.data;
                 })
                 .catch(error => {
-                    console.log(error.message)
-                    document.getElementById("suggestions").innerText += error.message;
+                    // console.log(error.message)
+                    console.log(error)
+                    // document.getElementById("suggestions").innerText = error.message;
                 }); 
             }
 
