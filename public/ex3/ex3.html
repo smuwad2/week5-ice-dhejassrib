@@ -37,21 +37,22 @@
             // Fetch categories from the server using Axios
             // and display them in the select element
             // url: http://localhost:3010/categories
-            axios.get("http://localhost:3010/categories")
-                .then(response => {
-                    showCategories(response.data);
-                })
-                .catch(error => console.error("Error fetching categories:", error));
+            axios.get("/categories") 
+            .then(response => {
+                showCategories(response.data);
+            })
+            .catch(error => console.error("Error fetching categories:", error));
 
         }
 
         function showCategories(categories) {
             // Display the categories in the select element
             const select = document.getElementById("selectCategory");
+
             categories.forEach(cat => {
                 let option = document.createElement("option");
-                option.value = cat;
-                option.textContent = cat;
+                option.value = cat;       // e.g. "Fruit"
+                option.textContent = cat; // display text
                 select.appendChild(option);
             });
         }
