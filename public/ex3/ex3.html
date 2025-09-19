@@ -37,11 +37,9 @@
             // Fetch categories from the server using Axios
             // and display them in the select element
             // url: http://localhost:3010/categories
-            axios.get("/categories") 
-            .then(response => {
-                showCategories(response.data);
-            })
-            .catch(error => console.error("Error fetching categories:", error));
+            axios.get("/categories")
+                .then(response => showCategories(response.data))
+                .catch(error => console.error("Error fetching categories:", error));
 
         }
 
@@ -69,15 +67,11 @@
                 return;
             }
 
-            let url = "http://localhost:3010/items";
-            if (category !== "all") {
-                url += `?category=${category}`;
-            }
+            let url = "/items";
+            if (category !== "all") url += `?category=${category}`;
 
             axios.get(url)
-                .then(response => {
-                    showItems(response.data);
-                })
+                .then(response => showItems(response.data))
                 .catch(error => console.error("Error fetching items:", error));
         }
 
