@@ -25,10 +25,7 @@
             var limitVal = document.getElementById("limit").value;
             try {
                 const response = await axios.get("/data", {
-                    params: {
-                        "type": typeVal,
-                        "limit": limitVal
-                    }
+                    params: { "type": typeVal, "limit": limitVal }
                 });
                 generateTable(response.data);
             } catch (error) {
@@ -45,24 +42,22 @@
             h2Elem.innerText = dataObj["type"];
             resultDivElem.appendChild(h2Elem);
 
-            // create table element
+            // create table and tbody
             const tableElem = document.createElement("table");
             tableElem.className = "table";
+            const tBodyElem = document.createElement("tbody");
 
-            // THEAD for headers
-            const thead = document.createElement("thead");
+            // header row inside tbody
             const trHead = document.createElement("tr");
             const tbHeadings = Object.keys(dataObj['records'][0]);
-            for (const headingVal of tbHeadings) {
+            for (const heading of tbHeadings) {
                 const th = document.createElement("th");
-                th.innerText = headingVal;
+                th.innerText = heading;
                 trHead.appendChild(th);
             }
-            thead.appendChild(trHead);
-            tableElem.appendChild(thead);
+            tBodyElem.appendChild(trHead);
 
-            // TBODY for data
-            const tBodyElem = document.createElement("tbody");
+            // data rows
             for (let i = 0; i < dataObj["records"].length; i++) {
                 const tr = document.createElement("tr");
                 for (let j = 0; j < tbHeadings.length; j++) {
@@ -72,8 +67,8 @@
                 }
                 tBodyElem.appendChild(tr);
             }
-            tableElem.appendChild(tBodyElem);
 
+            tableElem.appendChild(tBodyElem);
             resultDivElem.appendChild(tableElem);
         }
     </script>
