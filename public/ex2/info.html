@@ -16,6 +16,7 @@
             <option value="suppliers">Suppliers</option>
         </select>
     </div>
+
     <div id="result"></div>
 
     <script>
@@ -24,34 +25,26 @@
             var limitVal = document.getElementById("limit").value;
             try {
                 const response = await axios.get("/data", {
-                    params: {
-                        "type": typeVal,
-                        "limit": limitVal
-                    }
+                    params: { "type": typeVal, "limit": limitVal }
                 });
                 generateTable(response.data);
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
             }
         }
 
         function generateTable(dataObj) {
             const resultDivElem = document.getElementById("result");
-            while (resultDivElem.firstChild) {
-                resultDivElem.firstChild.remove(); // clear previous
-            }
+            while (resultDivElem.firstChild) resultDivElem.firstChild.remove();
 
-            // create h2
             const h2Elem = document.createElement("h2");
             h2Elem.innerText = dataObj["type"];
             resultDivElem.appendChild(h2Elem);
 
-            // create table
             const tableElem = document.createElement("table");
             tableElem.className = "table";
 
-            // create thead
+            // CREATE THEAD
             const thead = document.createElement("thead");
             const trHead = document.createElement("tr");
             const tbHeadings = Object.keys(dataObj['records'][0]);
@@ -63,7 +56,7 @@
             thead.appendChild(trHead);
             tableElem.appendChild(thead);
 
-            // create tbody
+            // CREATE TBODY
             const tBodyElem = document.createElement("tbody");
             for (let i = 0; i < dataObj["records"].length; i++) {
                 const tr = document.createElement("tr");
