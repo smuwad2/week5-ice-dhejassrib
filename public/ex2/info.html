@@ -72,18 +72,30 @@
                 tableElem.className = "table";
                 const tBodyElem = document.createElement("tbody");
                 // create table heading elements
-                const trElem = document.createElement("tr");
+                // const trElem = document.createElement("tr");
+                // const tbHeadings = Object.keys(dataObj['records'][0]);
+                // for (const headingVal of tbHeadings) { // ['name', 'price']
+                //     const thElem = document.createElement("th");
+                //     thElem.innerText = headingVal;
+                //     trElem.appendChild(thElem);
+                // }
+                // tBodyElem.appendChild(trElem);
+                // create table head
+                // const thead = document.createElement("thead");
+                const trHead = document.createElement("tr");
                 const tbHeadings = Object.keys(dataObj['records'][0]);
-                for (const headingVal of tbHeadings) { // ['name', 'price']
+                for (const headingVal of tbHeadings) { 
                     const thElem = document.createElement("th");
                     thElem.innerText = headingVal;
-                    trElem.appendChild(thElem);
+                    trHead.appendChild(thElem);
                 }
-                tBodyElem.appendChild(trElem);
-                tableElem.appendChild(tBodyElem);
-                resultDivElem.appendChild(tableElem);
+                tBodyElem.appendChild(trHead);
+                // tableElem.appendChild(thead);
+
+                // tableElem.appendChild(tBodyElem);
 
                 // create the table body elements
+                // const tBodyElem = document.createElement("tbody");
                 // loop through the elements in records array
                 for (let i=0; i<dataObj["records"].length; i++) {
                     const trElem = document.createElement("tr");
